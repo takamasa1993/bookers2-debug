@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
   belongs_to :user
+  has_many :book_comments, dependent: :destroy
   
   def get_image
       file_path = Rails.root.join('app/assets/images/default-image.jpg')
