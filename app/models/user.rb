@@ -30,7 +30,15 @@ class User < ApplicationRecord
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "email", "encrypted_password", "id", "introduction", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at"]
+  def self.search_for(content, method)
+    if method == 'perfect'
+      User.where(name: content)
+    elsif method == 'forward'
+      User.where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      User.where('name LIKE ?', '%' + content)
+    else
+      User.where('name LIKE ?', '%' + content + '%')
+    end
   end
 end
