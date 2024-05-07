@@ -1,5 +1,6 @@
 <main>
   <div class='container px-5'>
+    <%= render partial: 'search', locals: { q: @q, url: users_path } %>
     <div class='row'>
       <div class='col-md-3'>
         <h2>User info</h2>

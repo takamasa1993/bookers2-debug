@@ -21,4 +21,11 @@ Rails.application.routes.draw do
       get 'followers' => 'relationships#followers', as: 'followers'
     end
   end
+  
+  resources :users do
+    collection do
+      get 'search'
+    end
+  end
+  
 end

@@ -11,22 +11,26 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
-  
+
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id'
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id'
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  
+
   def followings_count
     self.followings.count
   end
-  
+
   def followers_count
     self.followers.count
   end
-  
-  
+
+
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "email", "encrypted_password", "id", "introduction", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at"]
   end
 end

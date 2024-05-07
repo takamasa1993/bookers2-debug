@@ -1,0 +1,21 @@
+<h1>検索結果</h1>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th class="col-2"></th>
+          <th class="col-2 text-left">name</th>
+          <th class="col-2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @results.each do |user| %>
+          <tr>
+            <td class="col-2 pr-0"><%= image_tag user.get_profile_image, size:'100x100' %></td>
+            <td class="col-2 pr-0 text-left"><%= user.name %></td>
+            <td class="col-2"><%= link_to 'Show', user %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
